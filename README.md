@@ -9,6 +9,7 @@
 
 
 위 논문은 **Attention heads are Independent and Additive**라고 말한다. 즉 여러 attention head가 각각 독립적인 역할을 하는 주체로 해석할 수 있다는 것이다. 
+
 $$W_O^{H}
 \begin{bmatrix}
 r^{h_1} \\
