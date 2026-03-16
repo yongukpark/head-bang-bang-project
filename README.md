@@ -3,6 +3,12 @@
 
 > **Kor** : Head Bang Bang(HBB) 프로젝트의 과정과 내용을 기록하는 저장소입니다. 우리의 목표는 각 attention head가 수행하는 역할을 찾거나 특정 주제와 강하게 연관된 attention head를 식별하고, 그 결과를 명확하게 드러낼 수 있는 알고리즘을 개발하는 것입니다.
 
+## Project Lineup
+- **HeadScope**: head 개입 기반 탐색 실험의 출발점
+- **HeadPatcher**: patching 실험의 자동화와 지표 집계 파이프라인
+- **HeadAtlas**: 결과 탐색/정리 워크스페이스
+
+
 ## 0. Introduction
 [A Mathematical Framework for Transformer Circuits - Anthropic](https://github.com/yongukpark/head-bang-bang-project.git)
 
@@ -42,4 +48,32 @@ $r_i$는 i번 attention head의 출력으로 보고 다음과 같이 additive하
 ## 1. [HeadScope](https://github.com/yongukpark/HeadScope)
 HeadScope는 transformer의 attention head에 직접 개입해 보면서, 어떤 head가 특정 지식이나 출력 패턴에 영향을 주는지 살펴보기 위한 실험 도구입니다. 단일 head 실험부터 multi-head 조합, 구조적 해석, 반복 검증까지 한 흐름으로 확인할 수 있습니다.
 
-head에 직접 개입하여 결과를 흔들어 보며 변화의 양상을 확인할 수 있는 실험 환경을 제공합니다.
+head에 직접 개입하여 결과를 흔들어 보며 변화의 양상을 확인할 수 있는 시각적 실험 환경을 제공합니다.
+
+![alt text](img/headscope.png)
+
+## 2. [HeadPatcher](https://github.com/yongukpark/HeadPatcher)
+HeadScope가 개별 실험의 변화 양상을 빠르게 확인하고 실험에 대한 감각을 잡는데에 초점을 두었다면, HeadMiner는 그 과정을 더 많은 프롬프트와 head에 대해 반복 가능하게 확장하기 위해 나온 분석 파이프라인입니다. 눈으로 확인한 패턴을 수치로 누적하고 비교할 수 있도록, 프롬프트 단위/헤드 단위 지표를 체계적으로 저장하는 역할을 맡습니다.
+- 실험에 사용할 데이터셋을 생성
+- 전체 head 스캔 및 특정 head 세트 평가를 CLI로 실행
+- 결과를 CSV/JSONL로 저장해 재현성과 비교 가능성 확보
+- 카테고리 단위 데이터셋을 기반으로 안정적인 영향 head 후보 추출
+
+핵심 지표와 실행 예시는 [HeadPatcher README](https://github.com/yongukpark/HeadPatcher/blob/main/README.md)를 참고합니다.
+
+실험 방식은 last token의 특정 head을 patching하는 방식을 사용하였고
+
+![alt text](img/patching.png)
+
+이를 통해 donor token의 logit이 올라가고 base token의 logit이 떨어지는지를 주로 확인하였습니다.
+
+## 3. [HeadAtlas](https://github.com/yongukpark/HeadAtlas)
+HeadAtlas는 누적된 결과를 시각적으로 탐색하고 정리하기 위한 인터페이스입니다.
+분석 결과를 빠르게 훑고 공유 가능한 형태로 다듬는 단계에 초점을 둡니다. 또한 시각화를 통해 특정 헤드의 역할을 찾는 것에 대한 추가적인 인사이트가 있는 것을 기대하고 있습니다.
+
+![alt text](img/atlas.png)
+
+## 4. Future Work
+현재는 단 1개의 방식(patching) 방식을 통해 특정 head의 역할을 규명하였지만 결과가 생각하는 것 만큼 두드러지게 나타나진 않았습니다. 
+
+HeadPatcher에서 구축한 데이터셋을 동일하게 가져와 역할을 더 잘 보여줄 수 있는 다른 알고리즘을 찾는 것을 목표로 하여 여러 알고리즘을 비교할 수 있는 파이프라인 구축을 목표로 합니다.
