@@ -38,3 +38,8 @@ $r_i$는 i번 attention head의 출력으로 보고 다음과 같이 additive하
 - 그 결과 실제 역할과 다르게 해석될 가능성이 존재한다
 
 따라서 본 프로젝트는 attention head를 개별적으로 분리하여 분석하고 각 head가 수행하는 역할을 식별하고 그 결과를 **누가 보더라도** 결과를 명확하게 드러낼 수 있는 알고리즘을 개발하는 것을 목표로 하고 있다.
+
+## 1. [HeadScope](https://github.com/yongukpark/HeadScope)
+HeadScope는 transformer의 attention head에 직접 개입해 보면서, 어떤 head가 특정 지식이나 출력 패턴에 영향을 주는지 살펴보기 위한 실험 도구입니다. 단일 head 실험부터 multi-head 조합, 구조적 해석, 반복 검증까지 한 흐름으로 확인할 수 있습니다.
+
+head에 직접 개입하여 결과를 흔들어 보며 변화의 양상을 확인할 수 있는 실험 환경을 제공합니다.
