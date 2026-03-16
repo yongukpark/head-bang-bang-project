@@ -10,7 +10,7 @@
 
 
 ## 0. Introduction
-[A Mathematical Framework for Transformer Circuits - Anthropic](https://github.com/yongukpark/head-bang-bang-project.git)
+[A Mathematical Framework for Transformer Circuits - Anthropic](https://transformer-circuits.pub/2021/framework/index.html)
 
 
 
